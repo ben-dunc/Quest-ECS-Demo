@@ -1,0 +1,10 @@
+# ninja log v5
+15	2227	7630839035358165	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	fd2935eb2175f1e6
+23	2231	7630839035370711	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	e40436c34006cf60
+52	2257	7630839035658837	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	c083d3a035a0deec
+45	2258	7630839035648835	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	54cdee9ae23187c5
+37	2307	7630839036115248	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	c283dff7f3042b9c
+0	2321	7630839036256993	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	acd0736e1e05ec0f
+29	2392	7630839036969091	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	513b27dc681afad7
+8	2455	7630839037569033	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	de6a25c2a6b6e33b
+2455	2577	7630839038864051	C:/Users/benja/Documents/RedTeam/Quest ECS Demo/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/cxx/Debug/4a191p2l/obj/armeabi-v7a/libgame.so	e86bb6f647067386

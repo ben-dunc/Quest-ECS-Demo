@@ -1,16 +1,18 @@
-using Unity.Entities;
 using UnityEngine;
-using Unity.Entities;
-using Unity.Mathematics;
-using Unity.Transforms;
 
-public class SimpleECSSpawner : MonoBehaviour
+public class SimpleECSManager : MonoBehaviour
 {
-    public GameObject simpleEntityPrefab;
+    public static SimpleECSManager Instance;
 
-    void Start()
+    public int numEntities = 100;
+    public float rowSize = 0.2f;
+    public float columnSize = 0.5f;
+    public float bobFrequency = 0.25f;
+    public float bobMagnitude = 1f;
+    public float zToY = 0.05f;
+
+    void Awake()
     {
-        var entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
-        // entityManager.Instantiate(simpleEntityPrefab);
+        Instance = this;
     }
 }

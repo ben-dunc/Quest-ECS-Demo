@@ -23,7 +23,7 @@ public partial struct SpatialAgentSystem : ISystem
         NativeList<int3> newChunks = new NativeList<int3>(1000, Allocator.TempJob);
 
         // determine which boids need to move
-        var job = new DetermineAgentChunkJob
+        var job = new DetermineAgentJob
         {
             chunkSize = SpatialHashManager.Instance.chunkSize,
             affectedEntities = affectedEntities.AsParallelWriter(),
@@ -58,7 +58,7 @@ public partial struct SpatialAgentSystem : ISystem
     }
 
     [BurstCompile]
-    public partial struct DetermineAgentChunkJob : IJobEntity
+    public partial struct DetermineAgentJob : IJobEntity
     {
         public uint chunkSize;
         public NativeList<Entity>.ParallelWriter affectedEntities;

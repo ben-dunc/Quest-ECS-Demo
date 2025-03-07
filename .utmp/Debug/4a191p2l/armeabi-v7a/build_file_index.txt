@@ -1,0 +1,2 @@
+C:\Users\benja\Documents\RedTeam\Quest ECS Demo\Library\Bee\Android\Prj\Mono2x\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
+C:\Users\benja\Documents\RedTeam\Quest ECS Demo\Library\Bee\Android\Prj\Mono2x\Gradle\unityLibrary\src\main\cpp\GameActivity\CMakeLists.txt

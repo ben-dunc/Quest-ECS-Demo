@@ -3,5 +3,7 @@ using UnityEngine;
 
 public partial struct SimpleECSData : IComponentData
 {
-    public uint id;
+    public int id;
+    public int row;
+    public int column;
 }
