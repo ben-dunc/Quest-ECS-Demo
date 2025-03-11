@@ -146,7 +146,7 @@ public partial struct SimpleECSSystem : ISystem
         [ReadOnly] public ComponentTypeHandle<SimpleECSData> simpleHandle;
         public EntityCommandBuffer.ParallelWriter ecb;
 
-        public void Execute(in ArchetypeChunk chunk, int unfilteredChunkIndex, bool useEnabledMask, in v128 chunkEnabledMask)
+        public void Execute(in Unity.Entities.ArchetypeChunk chunk, int unfilteredChunkIndex, bool useEnabledMask, in v128 chunkEnabledMask)
         {
             var entities = chunk.GetNativeArray(entityHandle);  // Get the entities in the chunk
             var simples = chunk.GetNativeArray(ref simpleHandle);  // Get the entities in the chunk

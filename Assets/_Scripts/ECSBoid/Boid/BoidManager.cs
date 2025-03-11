@@ -14,15 +14,15 @@ public class BoidManager : MonoBehaviour
 
     [Header("Separation")]
     public float separationDistance = 2;
-    public float separationStrength = 10;
+    public float separationStrength = 1f;
 
     [Header("Alignment")]
     public float alignmentDistance = 8;
-    public float alignmentStrength = 8;
+    public float alignmentStrength = 1f;
 
     [Header("Cohesion")]
     public float cohesionDistance = 4;
-    public float cohesionStrength = 4;
+    public float cohesionStrength = 1f;
 
     [Header("Repeller")]
     public float repellerDistance = 5;

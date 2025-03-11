@@ -49,12 +49,12 @@ public partial struct SpatialAgentSystem : ISystem
         // assign chunk data to any chunks that don't have it
         var query = state.GetEntityQuery(
             ComponentType.ReadOnly<SpatialAgentData>(),
-            ComponentType.ChunkComponentExclude<SpatialChunkData>()
+            ComponentType.ChunkComponentExclude<ArchetypeChunk>()
         );
         var numChunks = query.CalculateChunkCount();
         if (numChunks > 0)
             Debug.Log($"Chunks assigned: {query.CalculateChunkCount()}");
-        state.EntityManager.AddChunkComponentData(query, new SpatialChunkData());
+        state.EntityManager.AddChunkComponentData(query, new ArchetypeChunk());
     }
 
     [BurstCompile]

@@ -26,7 +26,7 @@ public partial struct SpatialChunkSystem : ISystem
         {
             transformHandle = state.GetComponentTypeHandle<LocalTransform>(true),
             boidHandle = state.GetComponentTypeHandle<BoidData>(true),
-            chunkDataHandle = state.GetComponentTypeHandle<SpatialChunkData>(false),
+            chunkDataHandle = state.GetComponentTypeHandle<ArchetypeChunk>(false),
         };
         state.Dependency = job.ScheduleParallel(query, state.Dependency);
     }
@@ -36,9 +36,9 @@ public struct UpdateChunkDataJob : IJobChunk
 {
     [ReadOnly] public ComponentTypeHandle<LocalTransform> transformHandle;
     [ReadOnly] public ComponentTypeHandle<BoidData> boidHandle;
-    public ComponentTypeHandle<SpatialChunkData> chunkDataHandle;
+    public ComponentTypeHandle<ArchetypeChunk> chunkDataHandle;
 
-    public void Execute(in ArchetypeChunk chunk, int unfilteredChunkIndex, bool useEnabledMask, in v128 chunkEnabledMask)
+    public void Execute(in Unity.Entities.ArchetypeChunk chunk, int unfilteredChunkIndex, bool useEnabledMask, in v128 chunkEnabledMask)
     {
         int count = chunk.Count;
 
@@ -73,7 +73,7 @@ public struct UpdateChunkDataJob : IJobChunk
             }
 
             // Set chunk component data
-            chunk.SetChunkComponentData(ref chunkDataHandle, new SpatialChunkData
+            chunk.SetChunkComponentData(ref chunkDataHandle, new ArchetypeChunk
             {
                 heading = heading,
                 position = position

@@ -523,19 +523,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simSpeed: 1
-  boidSpeed: 1
-  boidRotateSpeed: 2
+  boidSpeed: 5
+  boidRotateSpeed: 0.5
   boidRandomness: 1
-  maxNumNeighborCheck: 20
-  separationDistance: 2
-  separationStrength: 10
-  alignmentDistance: 8
-  alignmentStrength: 8
-  cohesionDistance: 4
-  cohesionStrength: 4
+  maxNumNeighborCheck: 100
+  separationDistance: 1.5
+  separationStrength: 100
+  alignmentDistance: 7
+  alignmentStrength: 1
+  cohesionDistance: 5
+  cohesionStrength: 1
   repellerDistance: 5
   repellerStrength: 100
-  edgeRepellerDistance: 10
+  edgeRepellerDistance: 0
   edgeRepellerStrength: 10
   overwritePosition: 0
   position: {x: 0, y: 0, z: 0}

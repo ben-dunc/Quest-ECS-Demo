@@ -1,4 +1,3 @@
-
 using System.Linq;
 using Unity.Burst.Intrinsics;
 using Unity.Collections;
@@ -37,15 +36,17 @@ public partial struct BoidSystem : ISystem
     public void OnUpdate(ref SystemState state)
     {
         // get all chunks
-
-        // var scs = state.World.GetExistingSystem(typeof(SpatialChunkSystem));
-        NativeArray<ArchetypeChunk> archChunks = boidQuery.ToArchetypeChunkArray(Allocator.TempJob);
+        NativeArray<Unity.Entities.ArchetypeChunk> archChunks = boidQuery.ToArchetypeChunkArray(Allocator.TempJob);
         int numChunks = archChunks.Count();
-        NativeArray<SpatialChunkData> spatialChunkData = new(archChunks.Count(), Allocator.TempJob);
-        var chunkTypeHandle = state.GetComponentTypeHandle<SpatialChunkData>(true);
+        NativeArray<SpatialAgentData> spatialAgentData = new(archChunks.Count(), Allocator.TempJob);
+        var sharedAgentComponentHandle = state.GetSharedComponentTypeHandle<SpatialAgentData>();
         for (int i = 0; i < numChunks; i++)
-            if (archChunks[i].HasChunkComponent(ref chunkTypeHandle))
-                spatialChunkData[i] = archChunks[i].GetChunkComponentData(ref chunkTypeHandle);
+        {
+            if (archChunks[i].NumSharedComponents() > 0)
+                spatialAgentData[i] = archChunks[i].GetSharedComponent(sharedAgentComponentHandle);
+            else
+                Debug.Log("Chunk didn't have shared data.");
+        }
 
         // execute job
         BoidJob job = new BoidJob
@@ -71,8 +72,11 @@ public partial struct BoidSystem : ISystem
             spatialHashPosition = SpatialHashManager.Instance.spatialHashPosition,
             chunkSize = SpatialHashManager.Instance.chunkSize,
             rand = this.rand,
-            spatialChunkData = spatialChunkData,
-
+            spatialAgentData = spatialAgentData,
+            otherChunks = archChunks,
+            transformHandleRW = state.GetComponentTypeHandle<LocalTransform>(false),
+            boidHandle = state.GetComponentTypeHandle<BoidData>(),
+            spatialAgentHandle = sharedAgentComponentHandle,
             // debug
             overwritePosition = BoidManager.Instance.overwritePosition,
             position = BoidManager.Instance.position,
@@ -104,23 +108,125 @@ public partial struct BoidSystem : ISystem
         public uint chunkSize;
         public float3 spatialHashPosition;
         public Unity.Mathematics.Random rand;
-        [ReadOnly] public NativeArray<SpatialChunkData> spatialChunkData;
-        [ReadOnly] public ComponentTypeHandle<LocalTransform> transformHandle;
+        public ComponentTypeHandle<LocalTransform> transformHandleRW;
         [ReadOnly] public ComponentTypeHandle<BoidData> boidHandle;
+        [ReadOnly] public SharedComponentTypeHandle<SpatialAgentData> spatialAgentHandle;
+        [ReadOnly] public NativeArray<SpatialAgentData> spatialAgentData;
+        [ReadOnly] public NativeArray<Unity.Entities.ArchetypeChunk> otherChunks;
 
 
         // debug
         public bool overwritePosition;
         public float3 position;
 
-        public void Execute(in ArchetypeChunk chunk, int unfilteredChunkIndex, bool useEnabledMask, in v128 chunkEnabledMask)
+        public void Execute(in Unity.Entities.ArchetypeChunk chunk, int unfilteredChunkIndex, bool useEnabledMask, in v128 chunkEnabledMask)
         {
+            NativeArray<float3> neighborPositions = new(maxNumNeighborCheck, Allocator.Temp);
+            NativeArray<Quaternion> neighborRotations = new(maxNumNeighborCheck, Allocator.Temp);
+            var chunkSAD = chunk.GetSharedComponent(spatialAgentHandle);
+            int numNeighbors = 0;
+
+            // get neighboring boids
+            for (int i = 0; i < otherChunks.Count(); i++)
+            {
+                if (numNeighbors >= maxNumNeighborCheck)
+                    break;
+
+                var diff = spatialAgentData[i].chunk - chunkSAD.chunk;
+                if (math.all(-1 <= diff & diff <= 1))
+                {
+                    var nt = otherChunks[i].GetNativeArray(ref transformHandleRW);
+                    int numNeighborsInChunk = nt.Count();
+
+                    for (int j = 0; j < numNeighborsInChunk; j++)
+                    {
+                        if (numNeighbors < maxNumNeighborCheck)
+                        {
+                            neighborPositions[numNeighbors] = nt[j].Position;
+                            neighborRotations[numNeighbors] = nt[j].Rotation;
+                            numNeighbors++;
+                        }
+                        else
+                            break;
+                    }
+                }
+            }
+
+            // iterate through neighbors
             var boids = chunk.GetNativeArray(ref boidHandle);
-            var transforms = chunk.GetNativeArray(ref transformHandle);
+            var transforms = chunk.GetNativeArray(ref transformHandleRW);
 
+            Debug.Log($"Num neighbors: {numNeighbors}");
 
+            if (numNeighbors > 0)
+            {
+                for (int i = 0; i < boids.Count(); i++)
+                {
+                    var transform = transforms[i];
+                    var heading = math.forward(transforms[i].Rotation);
 
-            Debug.Log("Boid chunk!");
+                    float3 separation = float3.zero;
+                    float3 alignment = float3.zero;
+                    float3 cohesion = float3.zero;
+
+                    for (int j = 0; j < numNeighbors; j++)
+                    {
+                        float3 diff = transform.Position - neighborPositions[j];
+                        float3 nh = math.forward(neighborRotations[j]);
+                        float distance = math.length(diff);
+
+                        if (distance > 0)
+                        {
+                            // separation - get inverse of distance
+                            if (distance < separationDistance)
+                                separation += math.lerp(heading, diff, 1f - (distance / separationDistance)) * separationStrength;
+                            if (distance < alignmentDistance)
+                                separation += math.lerp(heading, nh, 1f - (distance / alignmentDistance)) * alignmentStrength;
+                            if (distance < cohesionDistance)
+                                separation += math.lerp(heading, -diff, 1f - (distance / cohesionDistance)) * cohesionStrength;
+                        }
+                    }
+
+                    if (numNeighbors > 0)
+                    {
+                        alignment /= numNeighbors;
+                        cohesion /= numNeighbors;
+                    }
+
+                    // update headings
+                    float3 newHeading = heading;
+
+                    // avoid edges of spatial hash size
+                    bool3 outside = math.abs(transform.Position - spatialHashPosition) > (spatialHashSize / 2) - edgeRepellerDistance;
+                    if (math.any(outside))
+                        newHeading += (spatialHashPosition - transform.Position) * (float3)outside * edgeRepellerStrength;
+                    else
+                    {
+                        newHeading += separation * separationStrength;
+                        newHeading += alignment * alignmentStrength;
+                        newHeading += cohesion * cohesionStrength;
+                    }
+
+                    newHeading = math.normalize(newHeading);
+
+                    if (!math.all(newHeading == float3.zero))
+                        heading = math.lerp(heading, newHeading, deltaTime * boidRotateSpeed);
+                    var newLook = quaternion.LookRotation(newHeading, math.up());
+
+                    // update position & rotation
+                    transform.Position += boidSpeed * deltaTime * heading;
+                    transform.Rotation = math.slerp(transform.Rotation, newLook, boidRotateSpeed * deltaTime);
+
+                    // assign position & rotation
+                    transforms[i] = transform;
+                }
+            }
+
+            // garbage cleanup
+            boids.Dispose();
+            transforms.Dispose();
+            neighborPositions.Dispose();
+            neighborRotations.Dispose();
         }
     }
 }
