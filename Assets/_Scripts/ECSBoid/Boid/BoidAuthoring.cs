@@ -4,7 +4,6 @@ using Unity.Entities;
 [RequireComponent(typeof(SpatialAgentAuthoring))]
 public class BoidAuthoring : MonoBehaviour
 {
-    public bool isStatic = false;
     public bool isRepeller = false;
 
     private class Baker : Baker<BoidAuthoring>
@@ -15,7 +14,7 @@ public class BoidAuthoring : MonoBehaviour
 
             AddComponent(entity, new BoidData
             {
-                isStatic = authoring.isStatic,
+                id = 0,
                 isRepeller = authoring.isRepeller
             });
         }

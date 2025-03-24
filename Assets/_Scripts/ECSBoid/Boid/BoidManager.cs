@@ -5,6 +5,9 @@ public class BoidManager : MonoBehaviour
 {
     public static BoidManager Instance = null;
 
+    [Header("Spawning")]
+    public int numBoids = 100;
+
     [Header("Simulation")]
     [Range(0, 10)] public float simSpeed = 1;
     public float boidSpeed = 1f;
