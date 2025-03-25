@@ -182,22 +182,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b56968d08cc528469d626d00ed76323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numBoids: 100
+  numBoids: 1000
   simSpeed: 1
   boidSpeed: 5
   boidRotateSpeed: 0.5
   boidRandomness: 1
   maxNumNeighborCheck: 100
   separationDistance: 1.5
-  separationStrength: 100
+  separationStrength: 2
   alignmentDistance: 7
-  alignmentStrength: 1
+  alignmentStrength: 2
   cohesionDistance: 5
   cohesionStrength: 1
   repellerDistance: 5
   repellerStrength: 100
   edgeRepellerDistance: 0
-  edgeRepellerStrength: 10
+  edgeRepellerStrength: 0.001
   overwritePosition: 0
   position: {x: 0, y: 0, z: 0}
 --- !u!1 &410087039
