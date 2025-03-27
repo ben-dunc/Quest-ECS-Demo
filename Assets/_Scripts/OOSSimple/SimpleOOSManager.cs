@@ -5,9 +5,7 @@ using Unity.Jobs;
 using UnityEngine;
 using UnityEngine.Jobs;
 
-// got to 10,000 before dipping below 60 fps
-
-public class SimpleOOSManager : MonoBehaviour
+public class SimpleOOSManager : TestManager
 {
     public int numEntities = 10;
     public float rowSize = 0.2f;
@@ -37,6 +35,22 @@ public class SimpleOOSManager : MonoBehaviour
     {
         m_AccessArray.Dispose();
     }
+
+    public override void SetTargetNumEntities(int num)
+    {
+        numEntities = num;
+    }
+
+    public override int GetNumEntities()
+    {
+        return currentNumEntities;
+    }
+
+    public override int GetTargetNumEntities()
+    {
+        return numEntities;
+    }
+
 
     // [ProPlayButton]
     void Update()

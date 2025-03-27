@@ -2,7 +2,7 @@ using UnityEngine;
 
 // got to 300,000 before dipping below 60 fps
 
-public class SimpleECSManager : MonoBehaviour
+public class SimpleECSManager : TestManager
 {
     public static SimpleECSManager Instance;
 
@@ -17,4 +17,20 @@ public class SimpleECSManager : MonoBehaviour
     {
         Instance = this;
     }
+
+    public override void SetTargetNumEntities(int num)
+    {
+        numEntities = num;
+    }
+
+    public override int GetNumEntities()
+    {
+        return SimpleECSSystem.currentNumEntities;
+    }
+
+    public override int GetTargetNumEntities()
+    {
+        return numEntities;
+    }
+
 }

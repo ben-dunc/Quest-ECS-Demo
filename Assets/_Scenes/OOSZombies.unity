@@ -510,7 +510,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 384914033}
-  - component: {fileID: 384914035}
+  - component: {fileID: 384914034}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -533,7 +533,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &384914035
+--- !u!114 &384914034
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -542,17 +542,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 384914032}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 391d0ba762e38a8499830d9f41b69184, type: 3}
+  m_Script: {fileID: 11500000, guid: 41a5954354287e147b35bb37795923a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numZombies: 100
-  speed: 1
-  rotateRate: 0.1
-  rotateMaxMin: 3
-  zombieRange: 50
-  doSpawnOOSPrefabs: 1
-  oosPrefab: {fileID: 1022282783927954847, guid: df87d38a09f3de94f8d8136b4f049a87, type: 3}
-  numOOSZombies: 0
+  numEntities: 10
+  currentNumEntities: 0
+  speed: 1.5
+  rotateRate: 15
+  rotateMaxMin: 5
+  zombieRange: 25
+  zombiePrefab: {fileID: 1022282783927954847, guid: df87d38a09f3de94f8d8136b4f049a87, type: 3}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
