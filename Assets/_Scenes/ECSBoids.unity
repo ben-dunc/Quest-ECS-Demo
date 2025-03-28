@@ -182,11 +182,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b56968d08cc528469d626d00ed76323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numBoids: 1000
+  numBoids: 10000
   simSpeed: 1
   boidSpeed: 7
-  boidRotateSpeed: 4.05
-  boidRandomness: 1
   maxNumNeighborCheck: 5
   separationDistance: 1.5
   separationStrength: 1
@@ -194,8 +192,6 @@ MonoBehaviour:
   alignmentStrength: 2
   cohesionDistance: 5
   cohesionStrength: 1
-  repellerDistance: 5
-  repellerStrength: 100
   edgeRepellerDistance: 0
   edgeRepellerStrength: 0.001
   overwritePosition: 0
@@ -479,6 +475,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CommonObjects
       objectReference: {fileID: 0}
+    - target: {fileID: 6538646722199125769, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      propertyPath: sceneIndex
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6538646722199125769, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      propertyPath: testManager
+      value: 
+      objectReference: {fileID: 384914036}
     - target: {fileID: 7074210405007385697, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
       propertyPath: m_InteractionManager
       value: 
@@ -486,7 +490,40 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8055840752587625556, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 6393087704765157948, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 8314015968297497520, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 5020380497344397792, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 3139598098030534261, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 8715479647630121556, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 8889744773120199292, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 8086259401782131131, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 8037335531019820468, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 4051714409554158825, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 513374465825230929, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

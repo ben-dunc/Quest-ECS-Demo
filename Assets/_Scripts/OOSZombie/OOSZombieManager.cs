@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst;
 using Unity.Collections;
 using Unity.Jobs;
 using Unity.Mathematics;
@@ -99,24 +100,13 @@ public class OOSZombieManager : TestManager
         };
 
         var zombieJob = job.Schedule(m_AccessArray);
-        StartCoroutine(DisposeAfterComplete(zombieJob, zombieDataNativeList));
+        // StartCoroutine(DisposeAfterComplete(zombieJob, zombieDataNativeList));
+        zombieDataNativeList.Dispose(zombieJob);
     }
 
     void UpdateTransformAccessArray()
     {
         m_AccessArray = new TransformAccessArray(transforms.ToArray());
-    }
-
-    IEnumerator DisposeAfterComplete(JobHandle job, NativeList<ZombieOOSData> list)
-    {
-        int waitNum = 4;
-        while (waitNum > 0)
-        {
-            waitNum--;
-            yield return new WaitForEndOfFrame();
-        }
-        job.Complete();
-        list.Dispose();
     }
 
     public override void SetTargetNumEntities(int num)
@@ -135,6 +125,7 @@ public class OOSZombieManager : TestManager
     }
 
 
+    [BurstCompile]
     public struct OOSZombieJob : IJobParallelForTransform
     {
         public float speed;

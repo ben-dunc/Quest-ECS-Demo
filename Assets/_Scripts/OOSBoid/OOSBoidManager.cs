@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Burst;
 using Unity.Collections;
 using Unity.Jobs;
 using Unity.Mathematics;
@@ -132,25 +133,12 @@ public class OOSBoidManager : TestManager
             boids = boidsNA,
         };
 
-        var updateJobHandle = updateJob.ScheduleReadOnlyByRef(m_transforms, 5, jobHandle);
-
-        StartCoroutine(DisposeAfterComplete(new[] { updateJobHandle, jobHandle }, boidsNA));
-    }
-
-    IEnumerator DisposeAfterComplete(JobHandle[] jobs, NativeArray<OOSBoidData> boidsNA)
-    {
-        int waitNum = 4;
-        while (waitNum > 0)
-        {
-            waitNum--;
-            yield return new WaitForEndOfFrame();
-        }
-        foreach (var j in jobs)
-            j.Complete();
+        var ujHandle = updateJob.ScheduleReadOnly(m_transforms, 5, jobHandle);
+        ujHandle.Complete();
 
         for (int i = 0; i < boidsNA.Count(); i++)
             boids[i] = boidsNA[i];
-        boidsNA.Dispose();
+        boidsNA.Dispose(ujHandle);
     }
 
     public override void SetTargetNumEntities(int num)
@@ -168,6 +156,7 @@ public class OOSBoidManager : TestManager
         return numEntities;
     }
 
+    [BurstCompile]
     public struct OOSBoidJob : IJobParallelForTransform
     {
         public float boidSpeed;
@@ -259,6 +248,7 @@ public class OOSBoidManager : TestManager
         }
     }
 
+    [BurstCompile]
     public struct OOSUpdateBoidJob : IJobParallelForTransform
     {
         public float chunkSize;

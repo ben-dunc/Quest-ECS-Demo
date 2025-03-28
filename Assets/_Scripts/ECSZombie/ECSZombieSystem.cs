@@ -40,8 +40,8 @@ public partial struct ECSZombieSystem : ISystem
 
             if (math.length(transform.Position - zombieManagerPosition) > zombieRange)
             {
-                transform.Position.x = (rand.NextFloat() * ECSZombieManager.Instance.zombieRange) - (ECSZombieManager.Instance.zombieRange / 2);
-                transform.Position.z = (rand.NextFloat() * ECSZombieManager.Instance.zombieRange) - (ECSZombieManager.Instance.zombieRange / 2);
+                transform.Position.x = (rand.NextFloat() * zombieRange) - (zombieRange / 2);
+                transform.Position.z = (rand.NextFloat() * zombieRange) - (zombieRange / 2);
                 transform.Position += zombieManagerPosition;
                 transform.Position.y = 0;
             }

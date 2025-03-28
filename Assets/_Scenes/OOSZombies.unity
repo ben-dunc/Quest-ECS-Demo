@@ -127,6 +127,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1328354924071437293, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      propertyPath: m_text
+      value: 'Previous Scene:
+
+        ECS ZOMBIES'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2257977322739666673, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      propertyPath: m_text
+      value: 'Next Scene:
+
+        ECS Boids
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2257977322739666673, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      propertyPath: m_fontSize
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 3556654779017797103, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      propertyPath: m_text
+      value: How many skinned meshes can we animate in the object oriented stack?
+        These zombies move in circles using the jobs system.
+      objectReference: {fileID: 0}
     - target: {fileID: 4410858580435510912, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -171,10 +194,55 @@ PrefabInstance:
       propertyPath: m_Name
       value: CommonObjects
       objectReference: {fileID: 0}
+    - target: {fileID: 5965816001898686476, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      propertyPath: m_text
+      value: OOS Zombies
+      objectReference: {fileID: 0}
+    - target: {fileID: 6538646722199125769, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      propertyPath: sceneIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6538646722199125769, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      propertyPath: testManager
+      value: 
+      objectReference: {fileID: 384914034}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8055840752587625556, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 6393087704765157948, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 8314015968297497520, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 5020380497344397792, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 3139598098030534261, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 8715479647630121556, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 8889744773120199292, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 8086259401782131131, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 8037335531019820468, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 4051714409554158825, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 513374465825230929, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
 --- !u!1 &255677554
 GameObject:
@@ -545,7 +613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41a5954354287e147b35bb37795923a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numEntities: 10
+  numEntities: 250
   currentNumEntities: 0
   speed: 1.5
   rotateRate: 15

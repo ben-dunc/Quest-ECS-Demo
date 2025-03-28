@@ -3,6 +3,7 @@ using Unity.Collections;
 using Unity.Entities;
 using Unity.Transforms;
 using Unity.Mathematics;
+using Unity.Burst;
 
 [UpdateInGroup(typeof(SimulationSystemGroup))]
 public partial struct ECSZombieSpawnerSystem : ISystem
@@ -98,6 +99,7 @@ public partial struct ECSZombieSpawnerSystem : ISystem
         }
     }
 
+    [BurstCompile]
     public partial struct ECSDestroyZombieJob : IJobChunk
     {
         public int numEntitiesGoal;

@@ -1,3 +1,4 @@
+using com.cyborgAssets.inspectorButtonPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,7 +14,7 @@ public class SimpleButton : MonoBehaviour
         {
             onClick.Invoke();
             pressed = true;
-            buttonMaterial.SetInt("ButtonLit", 1);
+            buttonMaterial.SetInt("_ButtonLit", 1);
         }
     }
 
@@ -22,7 +23,13 @@ public class SimpleButton : MonoBehaviour
         if (other.tag == "Player" && pressed)
         {
             pressed = false;
-            buttonMaterial.SetInt("ButtonLit", 0);
+            buttonMaterial.SetInt("_ButtonLit", 0);
         }
+    }
+
+    [ProButton]
+    void InvokeButton()
+    {
+        onClick.Invoke();
     }
 }

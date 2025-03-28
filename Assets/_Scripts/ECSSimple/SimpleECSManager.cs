@@ -16,6 +16,7 @@ public class SimpleECSManager : TestManager
     void Awake()
     {
         Instance = this;
+        SimpleECSSystem.currentNumEntities = 0;
     }
 
     public override void SetTargetNumEntities(int num)

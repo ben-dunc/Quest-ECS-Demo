@@ -1,3 +1,4 @@
+using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
@@ -30,6 +31,7 @@ public partial struct SpatialAgentSystem : ISystem
         state.Dependency = job.ScheduleParallel(state.Dependency);
     }
 
+    [BurstCompile]
     public partial struct SetAgentZoneJob : IJobEntity
     {
         public uint chunkSize;

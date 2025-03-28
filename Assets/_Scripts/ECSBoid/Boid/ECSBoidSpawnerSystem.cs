@@ -4,6 +4,7 @@ using Unity.Entities;
 using Unity.Transforms;
 using Unity.Mathematics;
 using UnityEngine;
+using Unity.Burst;
 
 [UpdateInGroup(typeof(SimulationSystemGroup))]
 public partial struct ECSBoidSpawnerSystem : ISystem
@@ -100,6 +101,7 @@ public partial struct ECSBoidSpawnerSystem : ISystem
         }
     }
 
+    [BurstCompile]
     public partial struct ECSDestroyBoidJob : IJobChunk
     {
         public int numEntitiesGoal;

@@ -127,6 +127,27 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1328354924071437293, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      propertyPath: m_text
+      value: 'Previous Scene:
+
+        OOS BOIDS'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2257977322739666673, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      propertyPath: m_text
+      value: 'Next Scene:
+
+        OOS Simple'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2257977322739666673, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      propertyPath: m_fontSize
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3556654779017797103, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      propertyPath: m_text
+      value: 'A super simple test: spawn as many meshes as possible with a simple
+        bobbing up/down system.'
+      objectReference: {fileID: 0}
     - target: {fileID: 4410858580435510912, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -171,10 +192,55 @@ PrefabInstance:
       propertyPath: m_Name
       value: CommonObjects
       objectReference: {fileID: 0}
+    - target: {fileID: 5965816001898686476, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      propertyPath: m_text
+      value: ECS Simple
+      objectReference: {fileID: 0}
+    - target: {fileID: 6538646722199125769, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      propertyPath: sceneIndex
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6538646722199125769, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      propertyPath: testManager
+      value: 
+      objectReference: {fileID: 384914035}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8055840752587625556, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 6393087704765157948, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 8314015968297497520, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 5020380497344397792, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 3139598098030534261, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 8715479647630121556, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 8889744773120199292, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 8086259401782131131, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 8037335531019820468, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 4051714409554158825, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 513374465825230929, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 85ccd2565d0b2fb4cb12e212c6c64b8f, type: 3}
 --- !u!1 &367249102
 GameObject:
@@ -273,7 +339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9efb57f94b5c1034583708313b844a79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numEntities: 10000
+  numEntities: 15000
   rowSize: 0.4
   columnSize: 0.4
   frequency: 0.2

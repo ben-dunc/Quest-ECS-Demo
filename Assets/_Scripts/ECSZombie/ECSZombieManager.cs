@@ -9,6 +9,12 @@ public class ECSZombieManager : TestManager
     public float rotateMaxMin = 5f;
     public float zombieRange = 50;
 
+    void Awake()
+    {
+        ECSZombieSpawnerSystem.currentNumEntities = 0;
+        Instance = this;
+    }
+
     public override int GetNumEntities()
     {
         return ECSZombieSpawnerSystem.currentNumEntities;
@@ -22,10 +28,5 @@ public class ECSZombieManager : TestManager
     public override void SetTargetNumEntities(int num)
     {
         numZombies = num;
-    }
-
-    void Awake()
-    {
-        Instance = this;
     }
 }

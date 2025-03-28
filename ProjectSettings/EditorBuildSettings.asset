@@ -5,10 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
+    path: Assets/_Scenes/ECSZombies.unity
+    guid: b9b405279c423284c8841da54dd33bfd
+  - enabled: 1
+    path: Assets/_Scenes/OOSZombies.unity
+    guid: 1b3f18c3147ed82479a8971c464fd127
+  - enabled: 1
     path: Assets/_Scenes/ECSBoids.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 0
+  - enabled: 1
+    path: Assets/_Scenes/OOSBoids.unity
+    guid: 5eeb5294c70b4a944874f87ad0a04fa0
+  - enabled: 1
     path: Assets/_Scenes/ECSSimple.unity
     guid: 25e997301cef5734cae8a5304a296817
   - enabled: 1

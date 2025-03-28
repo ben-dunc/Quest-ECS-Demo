@@ -1,3 +1,4 @@
+using Unity.Burst;
 using Unity.Burst.Intrinsics;
 using Unity.Collections;
 using Unity.Entities;
@@ -119,6 +120,7 @@ public partial struct SimpleECSSystem : ISystem
         state.Dependency = job.ScheduleParallel(state.Dependency);
     }
 
+    [BurstCompile]
     public partial struct BobJob : IJobEntity
     {
         public float frequency;
@@ -139,6 +141,7 @@ public partial struct SimpleECSSystem : ISystem
         }
     }
 
+    [BurstCompile]
     public partial struct DestroySimpleJob : IJobChunk
     {
         public int numEntitiesGoal;

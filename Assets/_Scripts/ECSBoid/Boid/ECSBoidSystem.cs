@@ -1,4 +1,5 @@
 using System.Linq;
+using Unity.Burst;
 using Unity.Burst.Intrinsics;
 using Unity.Collections;
 using Unity.Entities;
@@ -87,8 +88,12 @@ public partial struct ECSBoidSystem : ISystem
 
         ECSUpdatePositionBoid updatePos = new();
         state.Dependency = updatePos.ScheduleParallel(state.Dependency);
+
+        archChunks.Dispose(state.Dependency);
+        spatialAgentArray.Dispose(state.Dependency);
     }
 
+    [BurstCompile]
     public partial struct BoidJob : IJobChunk
     {
         public int maxNumNeighborCheck;
@@ -119,18 +124,8 @@ public partial struct ECSBoidSystem : ISystem
             NativeArray<quaternion> neighborRotations = new(maxNumNeighborCheck, Allocator.Temp);
 
             // get boids in this chunk & iterate through neighbors
-            ExecuteBoidAlgorithm(in chunk);
-
-            // garbage cleanup
-            neighborPositions.Dispose();
-            neighborRotations.Dispose();
-        }
-
-        void ExecuteBoidAlgorithm(in ArchetypeChunk chunk)
-        {
-            Profiler.BeginSample("ExecuteBoidAlgorithm");
             var transforms = chunk.GetNativeArray(ref transformHandleRW);
-            int numBoids = transforms.Count();
+            int numBoids = transforms.Length;
             int numNeighbors = math.min(numBoids, maxNumNeighborCheck);
 
             for (int i = 0; i < numBoids; i++)
@@ -192,10 +187,14 @@ public partial struct ECSBoidSystem : ISystem
                 // assign position & rotation
                 transforms[i] = transform;
             }
-            Profiler.EndSample();
+
+            // garbage cleanup
+            neighborPositions.Dispose();
+            neighborRotations.Dispose();
         }
     }
 
+    [BurstCompile]
     public partial struct ECSUpdatePositionBoid : IJobEntity
     {
         public void Execute(ref ECSBoidData boid, in LocalTransform localTransform)

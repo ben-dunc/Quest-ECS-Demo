@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst;
 using Unity.Collections;
 using Unity.Jobs;
 using UnityEngine;
@@ -122,7 +123,7 @@ public class SimpleOOSManager : TestManager
         };
 
         var bobJob = job.Schedule(m_AccessArray);
-        StartCoroutine(DisposeAfterComplete(bobJob, simpleDataNativeList));
+        simpleDataNativeList.Dispose(bobJob);
     }
 
     void UpdateTransformAccessArray()
@@ -130,18 +131,7 @@ public class SimpleOOSManager : TestManager
         m_AccessArray = new TransformAccessArray(transforms.ToArray());
     }
 
-    IEnumerator DisposeAfterComplete(JobHandle job, NativeList<SimpleOOSDataStruct> list)
-    {
-        int waitNum = 4;
-        while (waitNum > 0)
-        {
-            waitNum--;
-            yield return new WaitForEndOfFrame();
-        }
-        job.Complete();
-        list.Dispose();
-    }
-
+    [BurstCompile]
     public struct OOSBobJob : IJobParallelForTransform
     {
         public float frequency;

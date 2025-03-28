@@ -36,6 +36,8 @@ public class ECSBoidManager : TestManager
     {
         if (Instance == null)
             Instance = this;
+
+        ECSBoidSpawnerSystem.currentNumEntities = 0;
     }
 
 
