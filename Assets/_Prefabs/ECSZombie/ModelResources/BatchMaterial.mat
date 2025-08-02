@@ -27,19 +27,19 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _SnivelerMainTexture:
-        m_Texture: {fileID: 2800000, guid: a4e617ca194b5084c991e8023dbd0368, type: 2}
+        m_Texture: {fileID: 2800000, guid: aed25fee9adfd9348baab8b58d9a14e9, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SnivelerMainTextureFirst:
-        m_Texture: {fileID: 2800000, guid: bca840680c7257f49ad4d0cb4f15048e, type: 2}
+        m_Texture: {fileID: 2800000, guid: 1c610ae0152ee4d4f95cbce7bf76943c, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SnivelerMainTextureSecond:
-        m_Texture: {fileID: 2800000, guid: 075e6a1dbbeef9b4cb33ce1efbf61f1a, type: 2}
+        m_Texture: {fileID: 2800000, guid: 4dbcef02f64898e4f8c6fad40aa4c515, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SnivelerMainTextureThird:
-        m_Texture: {fileID: 2800000, guid: 1ffd905ef0968b5409ca83436082377a, type: 2}
+        m_Texture: {fileID: 2800000, guid: 89d83e725bc37464f83f92d4074f50e6, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SnivelerNormalTexture:
@@ -83,7 +83,7 @@ Material:
     - _SnivelerRenderPixel: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &8293946615944183724
+--- !u!114 &28556430375683521
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

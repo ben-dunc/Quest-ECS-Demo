@@ -5,24 +5,27 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/ECSZombies.unity
     guid: b9b405279c423284c8841da54dd33bfd
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/OOSZombies.unity
     guid: 1b3f18c3147ed82479a8971c464fd127
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/ECSBoids.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/OOSBoids.unity
     guid: 5eeb5294c70b4a944874f87ad0a04fa0
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/ECSSimple.unity
     guid: 25e997301cef5734cae8a5304a296817
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/OOSSimple.unity
     guid: d864339243345214c9dc9edecff8f487
+  - enabled: 1
+    path: Assets/_Scenes/IndirectInstancing.unity
+    guid: 9671e87796be8864cbc0696bb52c6a72
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: e6739bcf5bc90ee4793cd31028dab26f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

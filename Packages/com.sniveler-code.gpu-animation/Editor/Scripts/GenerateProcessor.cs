@@ -87,12 +87,15 @@ namespace SnivelerCode.GpuAnimation.Editor.Scripts
                 for (var i = 0; i < sharedMesh.subMeshCount; ++i)
                 {
                     var mainTexture = prefab.Skin.sharedMaterials[i].mainTexture;
-                    var textureHash = mainTexture.GetHashCode();
-                    if (!partialTextures.ContainsKey(textureHash))
+                    if (mainTexture != null)
                     {
-                        PrepareTexture(mainTexture);
-                        s_PartialTextureIndex.Add(textureHash, partialTextures.Count);
-                        partialTextures.Add(textureHash, mainTexture as Texture2D);
+                        var textureHash = mainTexture.GetHashCode();
+                        if (!partialTextures.ContainsKey(textureHash))
+                        {
+                            PrepareTexture(mainTexture);
+                            s_PartialTextureIndex.Add(textureHash, partialTextures.Count);
+                            partialTextures.Add(textureHash, mainTexture as Texture2D);
+                        }
                     }
                 }
             }
@@ -245,20 +248,22 @@ namespace SnivelerCode.GpuAnimation.Editor.Scripts
                 for (var k = 0; k < mesh.subMeshCount; ++k)
                 {
                     var mainTexture = prefab.Skin.sharedMaterials[k].mainTexture;
-
-                    var textureHash = mainTexture.GetHashCode();
-                    var rectIndex = s_PartialTextureIndex[textureHash];
-                    var textureRect = s_TexturePackRects[rectIndex];
-
-                    var subMeshInfo = mesh.GetSubMesh(k);
-                    for (var v = 0; v < subMeshInfo.vertexCount; ++v)
+                    if (mainTexture != null)
                     {
-                        var uvVector = mesh.uv[subMeshInfo.firstVertex + v];
-                        uvUpdate[subMeshInfo.firstVertex + v] = new Vector2
+                        var textureHash = mainTexture.GetHashCode();
+                        var rectIndex = s_PartialTextureIndex[textureHash];
+                        var textureRect = s_TexturePackRects[rectIndex];
+
+                        var subMeshInfo = mesh.GetSubMesh(k);
+                        for (var v = 0; v < subMeshInfo.vertexCount; ++v)
                         {
-                            x = uvVector.x * textureRect.width + textureRect.x,
-                            y = uvVector.y * textureRect.height + textureRect.y
-                        };
+                            var uvVector = mesh.uv[subMeshInfo.firstVertex + v];
+                            uvUpdate[subMeshInfo.firstVertex + v] = new Vector2
+                            {
+                                x = uvVector.x * textureRect.width + textureRect.x,
+                                y = uvVector.y * textureRect.height + textureRect.y
+                            };
+                        }
                     }
                 }
 
