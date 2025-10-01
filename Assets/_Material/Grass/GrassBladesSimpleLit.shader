@@ -1,5 +1,5 @@
 // Shader targeted for low end devices. Single Pass Forward Rendering.
-Shader "Custom/Grass Blades Simple Lit"
+Shader "Custom/Grass Blade Simple Lit"
 {
     // Keep properties of StandardSpecular shader for upgrade reasons.
     Properties
@@ -139,112 +139,7 @@ Shader "Custom/Grass Blades Simple Lit"
             // -------------------------------------
             // Includes
             #include "Packages/com.unity.render-pipelines.universal/Shaders/SimpleLitInput.hlsl"
-            #include "Packages/com.unity.render-pipelines.universal/Shaders/SimpleLitForwardPass.hlsl"
-
-            
-
-            // Used in Standard (Simple Lighting) shader
-            Varyings GrassLitPassVertexSimple(Attributes input)
-            {
-                Varyings output = (Varyings)0;
-
-                UNITY_SETUP_INSTANCE_ID(input);
-                UNITY_TRANSFER_INSTANCE_ID(input, output);
-                UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(output);
-
-                float3 positionWS = TransformObjectToWorld(input.positionOS.xyz);
-
-                input.positionOS.xz += sin(positionWS.xz + _Time.y / 2) * pow(saturate(positionWS.y / 1), 3) * 0.5;
-                
-                VertexPositionInputs vertexInput = GetVertexPositionInputs(input.positionOS.xyz);
-                VertexNormalInputs normalInput = GetVertexNormalInputs(input.normalOS, input.tangentOS);
-
-            #if defined(_FOG_FRAGMENT)
-                    half fogFactor = 0;
-            #else
-                    half fogFactor = ComputeFogFactor(vertexInput.positionCS.z);
-            #endif
-
-                output.uv = TRANSFORM_TEX(input.texcoord, _BaseMap);
-                output.positionWS.xyz = vertexInput.positionWS;
-                output.positionCS = vertexInput.positionCS;
-
-            #ifdef _NORMALMAP
-                half3 viewDirWS = GetWorldSpaceViewDir(vertexInput.positionWS);
-                output.normalWS = half4(normalInput.normalWS, viewDirWS.x);
-                output.tangentWS = half4(normalInput.tangentWS, viewDirWS.y);
-                output.bitangentWS = half4(normalInput.bitangentWS, viewDirWS.z);
-            #else
-                output.normalWS = NormalizeNormalPerVertex(normalInput.normalWS);
-            #endif
-
-                OUTPUT_LIGHTMAP_UV(input.staticLightmapUV, unity_LightmapST, output.staticLightmapUV);
-            #ifdef DYNAMICLIGHTMAP_ON
-                output.dynamicLightmapUV = input.dynamicLightmapUV.xy * unity_DynamicLightmapST.xy + unity_DynamicLightmapST.zw;
-            #endif
-                OUTPUT_SH4(vertexInput.positionWS, output.normalWS.xyz, GetWorldSpaceNormalizeViewDir(vertexInput.positionWS), output.vertexSH, output.probeOcclusion);
-
-                #ifdef _ADDITIONAL_LIGHTS_VERTEX
-                    half3 vertexLight = VertexLighting(vertexInput.positionWS, normalInput.normalWS);
-                    output.fogFactorAndVertexLight = half4(fogFactor, vertexLight);
-                #else
-                    output.fogFactor = fogFactor;
-                #endif
-
-                #if defined(REQUIRES_VERTEX_SHADOW_COORD_INTERPOLATOR)
-                    output.shadowCoord = GetShadowCoord(vertexInput);
-                #endif
-
-                return output;
-            }
-            
-
-
-            // Used for StandardSimpleLighting shader
-            void GrassLitPassFragmentSimple(
-                Varyings input
-                , out half4 outColor : SV_Target0
-            #ifdef _WRITE_RENDERING_LAYERS
-                , out float4 outRenderingLayers : SV_Target1
-            #endif
-            )
-            {
-                UNITY_SETUP_INSTANCE_ID(input);
-                UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
-
-                SurfaceData surfaceData;
-                InitializeSimpleLitSurfaceData(input.uv, surfaceData);
-                surfaceData.albedo.xyz *= saturate(input.positionWS.y * 0.5 + 0.5);
-
-            #ifdef LOD_FADE_CROSSFADE
-                LODFadeCrossFade(input.positionCS);
-            #endif
-
-                InputData inputData;
-                InitializeInputData(input, surfaceData.normalTS, inputData);
-                SETUP_DEBUG_TEXTURE_DATA(inputData, UNDO_TRANSFORM_TEX(input.uv, _BaseMap));
-
-            #if defined(_DBUFFER)
-                ApplyDecalToSurfaceData(input.positionCS, surfaceData, inputData);
-            #endif
-
-                InitializeBakedGIData(input, inputData);
-
-                half4 color = UniversalFragmentBlinnPhong(inputData, surfaceData);
-                color.rgb = MixFog(color.rgb, inputData.fogCoord);
-                color.a = OutputAlpha(color.a, IsSurfaceTypeTransparent(_Surface));
-
-                outColor = color;
-
-            #ifdef _WRITE_RENDERING_LAYERS
-                uint renderingLayers = GetMeshRenderingLayer();
-                outRenderingLayers = float4(EncodeMeshRenderingLayer(renderingLayers), 0, 0, 0);
-            #endif
-            }
-
-
-
-
+            #include "Assets/_Material/Grass/GrassBladesSimpleLitForwardPass.hlsl"
             ENDHLSL
         }
 

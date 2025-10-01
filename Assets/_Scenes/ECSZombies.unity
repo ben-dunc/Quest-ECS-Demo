@@ -606,7 +606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 391d0ba762e38a8499830d9f41b69184, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numZombies: 1000
+  numZombies: 1700
   speed: 2
   rotateRate: 0.1
   rotateMaxMin: 3

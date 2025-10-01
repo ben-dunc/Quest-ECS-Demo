@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b56968d08cc528469d626d00ed76323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numBoids: 10000
+  numBoids: 30000
   simSpeed: 1
   boidSpeed: 7
   maxNumNeighborCheck: 5
